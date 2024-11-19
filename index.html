@@ -3,84 +3,236 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mi Perfil Personal</title>
+    <title>Perfil de Nataly Herrera</title>
     <link rel="icon" href="images/gato.png" type="image/x-icon">
     <style>
+        /* Reset básico */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
         body {
             font-family: 'Arial', sans-serif;
-            background-color: #e9ecef;
             margin: 0;
-            padding: 20px;
+            padding: 0;
+            transition: background 0.5s, color 0.5s, transform 0.3s ease-in-out;
         }
-        .container {
-            max-width: 600px;
-            margin: auto;
-            background: #ffffff;
-            padding: 30px;
-            border-radius: 10px;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-            transition: transform 0.2s;
-        }
-        .container:hover {
-            transform: scale(1.02);
-        }
-        h1 {
-            text-align: center;
-            color: #007bff;
-            margin-bottom: 20px;
-        }
-        .personal-info, .links, .courses {
-            margin-bottom: 20px;
-            padding: 15px;
-            border-radius: 8px;
-            background-color: #f8f9fa;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
-        }
-        .personal-info p, .links a, .courses p {
-            margin: 10px 0;
+
+        /* Modo normal (formal) */
+        body.normal-mode {
+            background: linear-gradient(135deg, #f0f0f0, #e0e0e0);
             color: #333;
         }
-        .links a {
-            display: block;
-            margin: 5px 0;
-            color: #007bff;
-            text-decoration: none;
-            padding: 8px;
-            border-radius: 5px;
-            transition: background-color 0.3s, color 0.3s;
+
+        /* Modo Gamer */
+        body.gamer-mode {
+            background: radial-gradient(circle at center, #000 50%, #1a1a1a);
+            color: #00ffcc;
         }
-        .links a:hover {
-            background-color: #007bff;
-            color: white;
+
+        /* Modo Navidad */
+        body.navidad-mode {
+            background: linear-gradient(135deg, #ff3333, #ffffff); /* Blanco y rojo */
+            color: #fff;
         }
-        .footer {
+
+        .container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            max-width: 1200px;
+            margin: 50px auto;
+            padding: 20px;
+            animation: fadeIn 0.5s ease;
+        }
+
+        /* Animación de aparición */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        /* Header */
+        .profile-header {
+            grid-column: 1 / -1;
             text-align: center;
-            font-size: 0.9em;
-            color: #777;
+            margin-bottom: 20px;
+        }
+
+        h1 {
+            font-size: 3em;
+            color: inherit;
+            margin-bottom: 10px;
+            animation: typing 2s steps(20, end), blink 0.5s step-end infinite;
+            white-space: nowrap;
+            overflow: hidden;
+            border-right: 3px solid currentColor;
+            transition: color 0.5s ease;
+        }
+
+        @keyframes typing {
+            from { width: 0 }
+            to { width: 100% }
+        }
+
+        @keyframes blink {
+            50% { border-color: transparent }
+        }
+
+        /* Secciones */
+        .section {
+            background: linear-gradient(135deg, #fff, #ddd);
+            border-radius: 15px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+            padding: 20px;
+            transition: background 0.3s ease, color 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        body.gamer-mode .section {
+            background: linear-gradient(135deg, #1a1a1a, #333);
+            box-shadow: 0 0 15px #00ffcc;
+            color: #00ffcc;
+        }
+
+        body.navidad-mode .section {
+            background: linear-gradient(135deg, #ffcccc, #ff9966);
+            box-shadow: 0 0 15px #ff6666;
+            color: #fff;
+        }
+
+        h2 {
+            font-size: 1.6em;
+            margin-bottom: 10px;
+            color: inherit;
+        }
+
+        p, a {
+            font-size: 1.1em;
+            margin: 10px 0;
+            color: inherit;
+        }
+
+        a {
+            text-decoration: none;
+            background: #007bff;
+            padding: 10px 15px;
+            border-radius: 10px;
+            color: #fff;
+            display: inline-block;
+            transition: background 0.3s ease, transform 0.3s ease;
+        }
+
+        /* Cambiar el estilo de los enlaces para el modo gamer */
+        body.gamer-mode a {
+            background: #00ffcc;
+            color: #000;
+        }
+
+        body.navidad-mode a {
+            background: #ff6666;
+            color: #fff;
+        }
+
+        a:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Selector de modo */
+        .mode-select {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            background: rgba(51, 51, 51, 0.8);
+            color: #fff;
+            padding: 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            transition: background 0.3s ease;
+        }
+
+        .mode-select select {
+            background: transparent;
+            border: none;
+            color: #fff;
+            font-size: 1em;
+            padding: 5px;
+            cursor: pointer;
+            transition: transform 0.3s ease-in-out;
+        }
+
+        .mode-select select:focus {
+            outline: none;
+            transform: scale(1.1);
+        }
+
+        .mode-select select option {
+            background-color: #333;
+            color: #fff;
+        }
+
+        body.gamer-mode .mode-select {
+            background: rgba(0, 255, 204, 0.8);
+        }
+
+        body.navidad-mode .mode-select {
+            background: rgba(255, 102, 102, 0.8);
+        }
+
+        /* Footer */
+        .footer {
+            grid-column: 1 / -1;
+            text-align: center;
             margin-top: 20px;
+            font-size: 0.9em;
+            color: inherit;
         }
     </style>
 </head>
-<body>
+<body class="normal-mode">
+
+<!-- Selector de modo -->
+<div class="mode-select">
+    <label for="mode">Selecciona el modo:</label>
+    <select id="mode" onchange="changeMode(this.value)">
+        <option value="normal">Modo Normal</option>
+        <option value="gamer">Modo Gamer</option>
+        <option value="navidad">Modo Navidad</option>
+    </select>
+</div>
 
 <div class="container">
-    <h1>Mi Perfil Personal</h1>
+    <!-- Header -->
+    <div class="profile-header">
+        <h1>Mi Perfil Personal</h1>
+    </div>
 
-    <div class="personal-info">
+    <!-- Datos personales -->
+    <div class="section">
         <h2>Datos Personales</h2>
         <p><strong>Nombre:</strong> Nataly Daniela Herrera Torreblanca</p>
         <p><strong>Edad:</strong> 17 años</p>
         <p><strong>Email:</strong> nataly.herrera@ucsp.edu.pe</p>
-        <p><strong>Descripción:</strong> Hola, está es mi página web y me gustan los videojuegos y escuchar música.</p>
+        <p><strong>Descripción:</strong> Hola, esta es mi página web y me gustan los videojuegos y escuchar música.</p>
     </div>
 
-    <div class="courses">
+    <!-- Cursos llevados -->
+    <div class="section">
         <h2>Cursos Llevados</h2>
         <p>Estructuras Discretas I</p>
         <p>Introducción a la Vida Universitaria</p>
         <p>Metodología del Estudio</p>
         <p>Comunicación</p>
+    </div>
 
+    <!-- Cursos actuales -->
+    <div class="section">
         <h2>Cursos Actualmente</h2>
         <p>Programación de Videojuegos</p>
         <p>Introducción a la Filosofía</p>
@@ -90,7 +242,8 @@
         <p>Introducción a Ciencias de la Computación</p>
     </div>
 
-    <div class="links">
+    <!-- Enlaces de mis amigos -->
+    <div class="section">
         <h2>Enlaces de mis amigos</h2>
         <a href="https://fernandaraquelcruzponce.neocities.org/" target="_blank">Fernanda Cruz</a>
         <a href="https://danvizcarra.github.io/franciscovizcarra.github.io/" target="_blank">Daniel Vizcarra</a>
@@ -98,10 +251,29 @@
         <a href="https://nathalifora.github.io/NathaliFora/" target="_blank">Nathali Poccori</a>
     </div>
 
+    <!-- Footer -->
     <div class="footer">
         &copy; 2024 Nataly Daniela Herrera Torreblanca
     </div>
 </div>
+
+<script>
+    function changeMode(mode) {
+        const body = document.body;
+
+        // Limpiar clases de modo
+        body.classList.remove('normal-mode', 'gamer-mode', 'navidad-mode');
+
+        // Agregar la clase correspondiente al modo seleccionado
+        if (mode === 'normal') {
+            body.classList.add('normal-mode');
+        } else if (mode === 'gamer') {
+            body.classList.add('gamer-mode');
+        } else if (mode === 'navidad') {
+            body.classList.add('navidad-mode');
+        }
+    }
+</script>
 
 </body>
 </html>
